@@ -429,13 +429,20 @@
     }
 
     /* Page entry shutter slide out */
-    window.addEventListener('DOMContentLoaded', function () {
+    function initShutter() {
         var pt = document.getElementById('page-transition');
         if (pt) {
-            setTimeout(function () {
-                pt.classList.add('exit');
-            }, 80);
+            pt.classList.remove('active');
+            pt.classList.add('exit');
         }
+    }
+
+    window.addEventListener('DOMContentLoaded', function () {
+        setTimeout(initShutter, 80);
+    });
+
+    window.addEventListener('pageshow', function () {
+        setTimeout(initShutter, 80);
     });
 
     /* Back to Site link shutter slide in */
