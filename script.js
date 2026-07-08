@@ -49,12 +49,27 @@ document.addEventListener('DOMContentLoaded', function () {
     var pageTransition = document.getElementById('page-transition');
     var adminLink = document.querySelector('.footer-admin-link');
 
-    /* Slide shutter out on page load */
-    if (pageTransition) {
-        setTimeout(function () {
-            pageTransition.classList.add('exit');
-        }, 80);
+    /* Slide shutter out on page load & cache restore */
+    function initShutter() {
+        var pt = document.getElementById('page-transition');
+        if (pt) {
+            pt.classList.remove('active');
+            pt.classList.add('exit');
+        }
     }
+
+    setTimeout(initShutter, 80);
+
+    window.addEventListener('pageshow', function () {
+        setTimeout(function () {
+            initShutter();
+            var preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.classList.add('loaded');
+            }
+            document.body.classList.add('preloader-done');
+        }, 80);
+    });
 
     if (pageTransition && adminLink) {
         adminLink.addEventListener('click', function (e) {
