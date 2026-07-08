@@ -7,7 +7,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@900&family=Playfair+Display:ital@1&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome -->
@@ -17,59 +17,42 @@
     <script>(function(){var _w=window,_d=document,_dt=false;_d.addEventListener('contextmenu',function(e){e.preventDefault();return false;});_d.addEventListener('keydown',function(e){if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&(e.key==='I'||e.key==='C'||e.key==='J'))||(e.ctrlKey&&(e.key==='U'||e.key==='S'))){e.preventDefault();e.stopPropagation();return false;}},true);function _showOv(){if(document.getElementById('_prot_ov'))return;var o=document.createElement('div');o.id='_prot_ov';o.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:#0b0f19;z-index:2147483647;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:monospace;color:#f8fafc;';o.innerHTML='<div style="font-size:3.5rem;margin-bottom:1rem">&#9940;</div><h1 style="font-size:1.6rem;margin-bottom:.5rem">Access Restricted</h1><p style="color:#94a3b8;font-size:.9rem">Developer tools are not permitted on this page.</p>';document.body?document.body.appendChild(o):document.addEventListener('DOMContentLoaded',function(){document.body.appendChild(o);});}function _hideOv(){var o=document.getElementById('_prot_ov');if(o)o.remove();}function _dbgCheck(){var t=new Date();(function(){}).constructor('debugger')();if(new Date()-t>80&&!_dt){_dt=true;_showOv();}}setInterval(_dbgCheck,1500);_w.addEventListener('resize',function(){var open=(_w.outerWidth-_w.innerWidth>160||_w.outerHeight-_w.innerHeight>160);if(open&&!_dt){_dt=true;_showOv();}else if(!open&&_dt){_dt=false;_hideOv();}});})();</script>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#home">
-                <div class="nav-logo-circle">M</div>
-            </a>
-            <button class="navbar-toggler" type="button" id="navToggler" aria-label="Toggle navigation">
-                <span class="toggler-bar"></span>
-                <span class="toggler-bar"></span>
-                <span class="toggler-bar"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-lg-center">
+    <!-- Custom Cursor -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
 
-                    <li class="nav-item"><a class="nav-link" href="#experience">Education</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-                    <li class="nav-item dropdown position-relative">
-                        <a class="nav-link settings-toggle-btn d-flex align-items-center" href="#" id="settingsDropdown" role="button" aria-expanded="false">
-                            Settings <i class="fa-solid fa-cog ms-1 nav-cog-icon"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end settings-dropdown p-3" aria-labelledby="settingsDropdown" style="min-width: 180px;">
-                            <li class="d-flex align-items-center justify-content-between">
-                                <span class="small fw-bold text-uppercase settings-label-text">Dark Mode</span>
-                                <div class="form-check form-switch m-0">
-                                    <input class="form-check-input theme-switch-input" type="checkbox" role="switch" id="theme-toggle">
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <div class="nav-divider d-none d-lg-block"></div>
-                    
-                    <a href="#" class="nav-social-icon"><i class="fa-brands fa-github"></i></a>
-                    <a href="https://discord.gg/QXSQnxgDMW" target="_blank" class="nav-social-icon"><i class="fa-brands fa-discord"></i></a>
-                    <a href="#" class="nav-social-icon"><i class="fa-brands fa-instagram"></i></a>
-                </ul>
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Page Transition Overlay -->
+    <div id="page-transition"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">M</div>
+            <div class="preloader-bar-container">
+                <div class="preloader-bar"></div>
             </div>
         </div>
-    </nav>
+    </div>
 
     <!-- Hero Section -->
     <header id="home" class="hero-section">
+        <!-- Background: dot grid -->
+        <div class="hero-dot-grid"></div>
+
         <div class="container z-index-1">
             <div class="row">
-                <div class="col-12 reveal active">
-                    <h2 class="hero-greeting">Hello, I'm Monish</h2>
-                    <h1 class="hero-title">
-                        FULLSTACK &<br>
-                        CREATIVE <span class="text-accent">DEV</span>
+                <div class="col-12">
+                    <h2 class="hero-greeting hero-fade-in">Hello, I'm Monish</h2>
+                    <h1 class="hero-title hero-fade-in">
+                        <span class="text-nowrap">FULLSTACK <span class="text-accent">&</span></span><br>
+                        <span class="text-nowrap">CREATIVE <span class="text-accent">DEV</span></span>
                     </h1>
-                    <div class="hero-buttons mt-5">
+                    <div class="hero-buttons mt-5 hero-fade-in">
                         <a href="#contact" class="btn btn-pill btn-black">
-                            Connect <i class="fa-solid fa-arrow-right ms-2"></i>
+                            Connect <i class="fa-solid fa-arrow-right-long ms-2"></i>
                         </a>
                         <a href="#" class="btn btn-pill btn-outline">
                             Download CV <i class="fa-solid fa-download ms-2"></i>
@@ -78,7 +61,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Scroll to Discover -->
         <a href="#skills" class="scroll-discover">
             <span class="scroll-text">Scroll to discover</span>
@@ -92,8 +75,9 @@
     <section id="skills" class="section-padding bg-light-alt">
         <div class="container reveal">
             <div class="section-title">
-                <h2>Skills & Expertise</h2>
-                <div class="underline"></div>
+                <span class="section-number">01 &mdash;</span>
+                <h2 data-split>Skills &amp; Expertise</h2>
+                <div class="underline anim-underline"></div>
             </div>
             <div class="row g-4 mt-4">
                 <!-- Column 1: Core Frontend -->
@@ -240,15 +224,39 @@
 
 
 
+    <!-- Marquee Band -->
+    <div class="marquee-band" aria-hidden="true">
+        <div class="marquee-track">
+            <span>FULLSTACK DEV</span><span class="marquee-dot">&#9679;</span>
+            <span>CREATIVE CODER</span><span class="marquee-dot">&#9679;</span>
+            <span>UI DESIGNER</span><span class="marquee-dot">&#9679;</span>
+            <span>REACT</span><span class="marquee-dot">&#9679;</span>
+            <span>C# .NET</span><span class="marquee-dot">&#9679;</span>
+            <span>MYSQL</span><span class="marquee-dot">&#9679;</span>
+            <span>YOUTUBE CREATOR</span><span class="marquee-dot">&#9679;</span>
+            <span>BGMI GAMER</span><span class="marquee-dot">&#9679;</span>
+            <!-- duplicate for seamless loop -->
+            <span>FULLSTACK DEV</span><span class="marquee-dot">&#9679;</span>
+            <span>CREATIVE CODER</span><span class="marquee-dot">&#9679;</span>
+            <span>UI DESIGNER</span><span class="marquee-dot">&#9679;</span>
+            <span>REACT</span><span class="marquee-dot">&#9679;</span>
+            <span>C# .NET</span><span class="marquee-dot">&#9679;</span>
+            <span>MYSQL</span><span class="marquee-dot">&#9679;</span>
+            <span>YOUTUBE CREATOR</span><span class="marquee-dot">&#9679;</span>
+            <span>BGMI GAMER</span><span class="marquee-dot">&#9679;</span>
+        </div>
+    </div>
+
     <!-- Experience Timeline Section -->
     <section id="experience" class="section-padding bg-light-alt">
         <div class="container reveal">
             <div class="section-title">
-                <h2>Education</h2>
-                <div class="underline"></div>
+                <span class="section-number">02 &mdash;</span>
+                <h2 data-split>Education</h2>
+                <div class="underline anim-underline"></div>
             </div>
             <div class="timeline mt-5">
-                <div class="timeline-item">
+                <div class="timeline-item reveal-left">
                     <div class="timeline-dot"></div>
                     <div class="modern-card p-4">
                         <h4 class="mb-1">Post Graduate (MCA)</h4>
@@ -264,7 +272,7 @@
                         <p class="text-muted mb-0">Completed Bachelor of Commerce degree.</p>
                     </div>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item reveal-right">
                     <div class="timeline-dot"></div>
                     <div class="modern-card p-4">
                         <h4 class="mb-1">12th Grade (HSC)</h4>
@@ -272,7 +280,7 @@
                         <p class="text-muted mb-0">Completed with 67%.</p>
                     </div>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item reveal-right">
                     <div class="timeline-dot"></div>
                     <div class="modern-card p-4">
                         <h4 class="mb-1">10th Grade (SSLC)</h4>
@@ -288,8 +296,9 @@
     <section id="passion" class="section-padding">
         <div class="container reveal">
             <div class="section-title">
-                <h2>Beyond Code</h2>
-                <div class="underline"></div>
+                <span class="section-number">03 &mdash;</span>
+                <h2 data-split>Beyond Code</h2>
+                <div class="underline anim-underline"></div>
             </div>
             
             <div class="modern-card p-0 overflow-hidden mt-5 position-relative">
@@ -304,13 +313,13 @@
                         <div class="row g-4 mb-4">
                             <div class="col-6">
                                 <div class="p-3 bg-light-alt rounded">
-                                    <h2 class="fw-bold text-accent mb-0">1.2K</h2>
+                                    <h2 class="fw-bold text-accent mb-0" data-count="1.2" data-suffix="K">1.2K</h2>
                                     <p class="text-muted small fw-bold mb-0 text-uppercase">Subscribers</p>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="p-3 bg-light-alt rounded">
-                                    <h2 class="fw-bold text-main mb-0">3+</h2>
+                                    <h2 class="fw-bold text-main mb-0" data-count="3" data-suffix="+">3+</h2>
                                     <p class="text-muted small fw-bold mb-0 text-uppercase">Main Games</p>
                                 </div>
                             </div>
@@ -326,10 +335,12 @@
                             Check Out My Channel <i class="fa-solid fa-arrow-right ms-2"></i>
                         </a>
                     </div>
-                    <div class="col-lg-5 bg-light-alt d-flex align-items-center justify-content-center p-5">
-                        <div class="text-center">
-                            <i class="fa-solid fa-headset text-muted" style="font-size: 10rem; opacity: 0.1;"></i>
-                            <h2 class="mt-4" style="font-family: var(--font-display); font-weight: 900; letter-spacing: -2px; color: var(--text-main); font-size: 3rem; line-height: 1;">GAMING &<br>YOUTUBE</h2>
+                    <div class="col-lg-5 gaming-youtube-card d-flex align-items-center justify-content-center p-5 position-relative overflow-hidden">
+                        <div class="card-stripe card-stripe-bold"></div>
+                        <div class="card-stripe card-stripe-thin"></div>
+                        <div class="text-center position-relative">
+                            <i class="fa-solid fa-headset gaming-headset-icon" style="font-size: 10rem;"></i>
+                            <h2 class="mt-4 gaming-card-title">GAMING &<br>YOUTUBE</h2>
                         </div>
                     </div>
                 </div>
@@ -341,8 +352,9 @@
     <section id="contact" class="section-padding">
         <div class="container reveal">
             <div class="section-title text-center">
-                <h2>Let's Connect</h2>
-                <div class="underline"></div>
+                <span class="section-number">04 &mdash;</span>
+                <h2 data-split>Let's Connect</h2>
+                <div class="underline anim-underline"></div>
             </div>
             <div class="row justify-content-center mt-4">
                 <div class="col-lg-8">
@@ -381,9 +393,29 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer text-center py-4 bg-light-alt">
+    <footer class="footer py-4 bg-light-alt border-top-subtle position-relative">
         <div class="container">
-            <p class="text-muted small mb-0">&copy; 2026 Monish. All rights reserved.</p>
+            <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+                <div>
+                    <p class="text-muted small mb-0">&copy; 2026 Monish. All rights reserved.</p>
+                </div>
+                
+                <a href="login.html" class="footer-admin-link">Admin</a>
+                
+                <div class="d-flex align-items-center gap-4">
+                    <div class="footer-socials d-flex gap-2">
+                        <a href="https://github.com/MonishOg44" class="footer-social-icon" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://discord.gg/QXSQnxgDMW" target="_blank" class="footer-social-icon" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+                        <a href="https://www.instagram.com/strangegtlive/" class="footer-social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                    <div class="footer-theme-selector form-switch d-flex align-items-center gap-2">
+                        <span class="small fw-bold text-uppercase text-muted" style="letter-spacing: 1px; font-size: 0.75rem; margin-right: 0.25rem;">
+                            Themes: <span id="theme-status" style="color: var(--text-main); font-weight: 700;">Light</span>
+                        </span>
+                        <input class="form-check-input theme-switch-input m-0" type="checkbox" role="switch" id="theme-toggle" style="cursor: pointer;">
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 
