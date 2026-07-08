@@ -17,6 +17,16 @@
     <script>(function(){var _w=window,_d=document,_dt=false;_d.addEventListener('contextmenu',function(e){e.preventDefault();return false;});_d.addEventListener('keydown',function(e){if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&(e.key==='I'||e.key==='C'||e.key==='J'))||(e.ctrlKey&&(e.key==='U'||e.key==='S'))){e.preventDefault();e.stopPropagation();return false;}},true);function _showOv(){if(document.getElementById('_prot_ov'))return;var o=document.createElement('div');o.id='_prot_ov';o.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:#0b0f19;z-index:2147483647;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:monospace;color:#f8fafc;';o.innerHTML='<div style="font-size:3.5rem;margin-bottom:1rem">&#9940;</div><h1 style="font-size:1.6rem;margin-bottom:.5rem">Access Restricted</h1><p style="color:#94a3b8;font-size:.9rem">Developer tools are not permitted on this page.</p>';document.body?document.body.appendChild(o):document.addEventListener('DOMContentLoaded',function(){document.body.appendChild(o);});}function _hideOv(){var o=document.getElementById('_prot_ov');if(o)o.remove();}function _dbgCheck(){var t=new Date();(function(){}).constructor('debugger')();if(new Date()-t>80&&!_dt){_dt=true;_showOv();}}setInterval(_dbgCheck,1500);_w.addEventListener('resize',function(){var open=(_w.outerWidth-_w.innerWidth>160||_w.outerHeight-_w.innerHeight>160);if(open&&!_dt){_dt=true;_showOv();}else if(!open&&_dt){_dt=false;_hideOv();}});})();</script>
 </head>
 <body>
+    <!-- Theme Flash Prevention -->
+    <script>
+        (function() {
+            var theme = localStorage.getItem('theme') || 'light';
+            if (theme === 'dark') {
+                document.body.classList.add('dark-theme');
+            }
+        })();
+    </script>
+
     <!-- Custom Cursor -->
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
@@ -277,7 +287,7 @@
                     <div class="modern-card p-4">
                         <h4 class="mb-1">12th Grade (HSC)</h4>
                         <p class="text-accent small fw-bold mb-3">Sree Narayana Mission Senior Secondary School (CBSE)</p>
-                        <p class="text-muted mb-0">Completed with 67%.</p>
+                        <p class="text-muted mb-0">Completed with 67.4%.</p>
                     </div>
                 </div>
                 <div class="timeline-item reveal-right">
@@ -285,7 +295,7 @@
                     <div class="modern-card p-4">
                         <h4 class="mb-1">10th Grade (SSLC)</h4>
                         <p class="text-accent small fw-bold mb-3">Sree Narayana Mission Senior Secondary School (CBSE)</p>
-                        <p class="text-muted mb-0">Completed with 67%.</p>
+                        <p class="text-muted mb-0">Completed with 65.6%.</p>
                     </div>
                 </div>
             </div>
