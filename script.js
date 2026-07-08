@@ -60,15 +60,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     setTimeout(initShutter, 80);
 
-    window.addEventListener('pageshow', function () {
-        setTimeout(function () {
+    window.addEventListener('pageshow', function (e) {
+        if (e.persisted) {
             initShutter();
             var preloader = document.getElementById('preloader');
             if (preloader) {
                 preloader.classList.add('loaded');
             }
             document.body.classList.add('preloader-done');
-        }, 80);
+        }
     });
 
     if (pageTransition && adminLink) {
@@ -254,8 +254,9 @@ document.addEventListener('DOMContentLoaded', function () {
             if (splitEl) splitEl.classList.add('chars-visible');
 
             /* stagger direct .reveal-child elements */
+            var delayMult = window.innerWidth < 768 ? 0.03 : 0.07;
             el.querySelectorAll('.reveal-child').forEach(function (child, i) {
-                child.style.transitionDelay = (i * 0.07) + 's';
+                child.style.transitionDelay = (i * delayMult) + 's';
                 child.classList.add('active');
             });
 
@@ -291,14 +292,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /* ── Hero Parallax on scroll ── */
     var heroEl = document.querySelector('.hero-section .container');
+    var isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
     window.addEventListener('scroll', function () {
-        if (!heroEl) return;
+        if (!heroEl || isTouchDevice || window.innerWidth < 768) return;
         var sy = window.scrollY;
         if (sy < window.innerHeight) {
             /* preserve the CSS left-shift across breakpoints */
             var shiftX = window.innerWidth >= 1200 ? -80 : window.innerWidth >= 768 ? -45 : 0;
             heroEl.style.transform = 'translateX(' + shiftX + 'px) translateY(' + (sy * 0.22) + 'px)';
             heroEl.style.opacity   = 1 - (sy / window.innerHeight) * 0.6;
+        }
+    }, { passive: true });
+
+    /* Reset scroll animations when scrolled all the way to the top */
+    window.addEventListener('scroll', function () {
+        if (window.scrollY < 10) {
+            if (heroEl) {
+                heroEl.style.opacity = 1;
+            }
+            document.querySelectorAll('.reveal.active').forEach(function (el) {
+                el.classList.remove('active');
+                el.querySelectorAll('.reveal-child').forEach(function (child) {
+                    child.classList.remove('active');
+                });
+                scrollObserver.observe(el);
+            });
+            document.querySelectorAll('.reveal-left.active, .reveal-right.active').forEach(function (el) {
+                el.classList.remove('active');
+                dirObserver.observe(el);
+            });
+            document.querySelectorAll('[data-split].chars-visible').forEach(function (el) {
+                el.classList.remove('chars-visible');
+                splitObserver.observe(el);
+            });
         }
     }, { passive: true });
 
@@ -341,25 +367,58 @@ document.addEventListener('DOMContentLoaded', function () {
     (function () {
         var scrollY      = window.scrollY;
         var targetY      = window.scrollY;
-        var velocityY    = 0;
         var friction     = 0.075; /* lower = more momentum, higher = snappier */
-        var wheelLock    = false;
         var rafId        = null;
-        var isTouch      = ('ontouchstart' in window);
 
-        if (isTouch) return; /* leave native scroll on touch devices */
+        function isScrollDisabled() {
+            var isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+            var isSmallScreen = window.innerWidth < 1024;
+            return isTouch && isSmallScreen;
+        }
 
-        /* Prevent default wheel, drive targetY manually */
+        /* Synchronize targetY with native scrolls (scrollbar drag, arrow keys) */
+        window.addEventListener('scroll', function () {
+            if (isScrollDisabled()) return;
+            if (!rafId) {
+                targetY = window.scrollY;
+                scrollY = window.scrollY;
+            }
+        }, { passive: true });
+
+        /* Prevent default wheel on desktop, drive targetY manually */
         window.addEventListener('wheel', function (e) {
+            if (isScrollDisabled()) return;
             e.preventDefault();
             targetY += e.deltaY * 0.9;
             targetY  = Math.max(0, Math.min(targetY, document.body.scrollHeight - window.innerHeight));
             if (!rafId) tick();
         }, { passive: false });
 
+        /* Smooth Anchor Scroll Integrated with Momentum Engine */
+        document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+            anchor.addEventListener('click', function (e) {
+                if (isScrollDisabled()) return;
+                var targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                var targetEl = document.querySelector(targetId);
+                if (!targetEl) return;
+                e.preventDefault();
+                
+                var targetPos = targetEl.getBoundingClientRect().top + window.scrollY;
+                var navHeight = window.innerWidth >= 992 ? 80 : 70; // adjust for responsive navbar height
+                targetY = Math.max(0, Math.min(targetPos - navHeight, document.body.scrollHeight - window.innerHeight));
+                
+                if (!rafId) tick();
+            });
+        });
+
         function lerp(a, b, t) { return a + (b - a) * t; }
 
         function tick() {
+            if (isScrollDisabled()) {
+                rafId = null;
+                return;
+            }
             scrollY = lerp(scrollY, targetY, friction * 8);
 
             var diff = Math.abs(targetY - scrollY);
@@ -407,8 +466,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 preloader.classList.add('loaded');
                 setTimeout(function () {
                     document.body.classList.add('preloader-done');
-                }, 300);
-            }, 1200);
+                }, 500);
+            }, 1800);
         } else {
             document.body.classList.add('preloader-done');
         }
@@ -523,7 +582,6 @@ document.addEventListener('DOMContentLoaded', function () {
         alertEl.id = 'futuristic-alert';
         alertEl.className = 'futuristic-alert';
         alertEl.innerHTML = [
-            '<div class="futuristic-alert-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>',
             '<div class="futuristic-alert-content">',
             '  <div class="futuristic-alert-title">' + title + '</div>',
             '  <div class="futuristic-alert-desc">' + desc + '</div>',
